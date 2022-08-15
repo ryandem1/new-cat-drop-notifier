@@ -1,6 +1,7 @@
+from functools import cached_property
+
 from bs4 import BeautifulSoup, ResultSet
 from requests import RequestException, Session
-from functools import cached_property
 
 from consts import ADOPT_ENDPOINT, RESULT_ITEM_CLASS
 from models import AnimalType, AnimalAdoptionCard
