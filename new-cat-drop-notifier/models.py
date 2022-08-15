@@ -4,8 +4,8 @@ Custom models and types
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Literal
-from bs4 import Tag
 
+from bs4 import Tag
 
 AnimalType = Literal["dogs", "cats", "small", "horsefarm"]
 
