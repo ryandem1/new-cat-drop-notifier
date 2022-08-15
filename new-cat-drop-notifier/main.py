@@ -1,4 +1,4 @@
-from ohs_adopt_page import OHSAdoptPage
+from interfaces import OHSAdoptPage
 
 
 def main():
