@@ -12,6 +12,7 @@ AnimalType = Literal["dogs", "cats", "small", "horsefarm"]
 
 @dataclass(frozen=True)
 class AnimalAdoptionCard:
+    """Represents 1 adoption card item from the /adopt page"""
     id: int
     added_timestamp: datetime
     animal_type: AnimalType | str
