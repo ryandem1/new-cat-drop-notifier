@@ -2,12 +2,11 @@ from os import getenv
 from time import sleep
 
 from interfaces import OHSAdoptPage, SMSMessenger
-from models import AnimalAdoptionCard
 
 
 def main():
     delay = int(getenv("DELAY", 15)) * 60  # Delay is in minutes, and we have to convert to seconds
-    cats_last_seen: list[AnimalAdoptionCard] = []
+    cats_last_seen = OHSAdoptPage("cats").all_animals
     sms_messenger = SMSMessenger()
 
     while True:

@@ -7,7 +7,7 @@ from typing import Literal
 
 from bs4 import Tag
 
-from consts import ADOPT_ENDPOINT
+from consts import OHS_BASE_URL
 
 AnimalType = Literal["dogs", "cats", "small", "horsefarm"]
 
@@ -26,13 +26,12 @@ class AnimalAdoptionCard:
     age: str
 
     def __str__(self) -> str:
-        out = f"""Name: {self.name}
+        out = f"""\n\tName: {self.name}
         Age: {self.age}
         Breed: {self.breed}
         Sex: {self.sex}
         Color: {self.color}
-        
-        Details: {ADOPT_ENDPOINT[:-1]}{self.details_endpoint}
+        Details: {OHS_BASE_URL}{self.details_endpoint}
         """
         return out
 
