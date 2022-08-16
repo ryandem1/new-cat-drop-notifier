@@ -6,7 +6,7 @@ from models import AnimalAdoptionCard
 
 
 def main():
-    delay = getenv("DELAY", 15) * 60  # Delay is in minutes and we have to convert to seconds
+    delay = getenv("DELAY", 15) * 60  # Delay is in minutes, and we have to convert to seconds
     cats_last_seen: list[AnimalAdoptionCard] = []
     sms_messenger = SMSMessenger()
 

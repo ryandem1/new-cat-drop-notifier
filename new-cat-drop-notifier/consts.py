@@ -2,3 +2,7 @@ OHS_BASE_URL = "https://www.oregonhumane.org/"
 ADOPT_ENDPOINT = OHS_BASE_URL + "/adopt/"
 
 RESULT_ITEM_CLASS = "result-item"
+
+TWILIO_ACCOUNT_SID = "TWILIO_ACCOUNT_SID"
+TWILIO_AUTH_TOKEN = "TWILIO_AUTH_TOKEN"
+

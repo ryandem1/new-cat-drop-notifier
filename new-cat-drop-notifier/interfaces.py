@@ -1,9 +1,11 @@
 from functools import cached_property
+from os import environ
 
 from bs4 import BeautifulSoup, ResultSet
 from requests import RequestException, Session
+from twilio.rest import Client
 
-from consts import ADOPT_ENDPOINT, RESULT_ITEM_CLASS
+from consts import ADOPT_ENDPOINT, RESULT_ITEM_CLASS, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 from models import AnimalType, AnimalAdoptionCard
 
 
@@ -52,6 +54,11 @@ class OHSAdoptPage:
 
 class SMSMessenger:
 
+    def __init__(self):
+        account_sid = environ[TWILIO_ACCOUNT_SID]
+        auth_token = environ[TWILIO_AUTH_TOKEN]
+        self.twilio = Client(account_sid, auth_token)
+
     def send_sms(self, message: str):
         """Sends an SMS message"""
-        print(message)
+        self.twilio.messages.create(message)
