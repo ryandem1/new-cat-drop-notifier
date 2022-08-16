@@ -26,12 +26,13 @@ class AnimalAdoptionCard:
     age: str
 
     def __str__(self) -> str:
-        out = f"""\n\tName: {self.name}
-        Age: {self.age}
-        Breed: {self.breed}
-        Sex: {self.sex}
-        Color: {self.color}
-        Details: {OHS_BASE_URL}{self.details_endpoint}
+        out = f"""\n
+Name: {self.name}
+Age: {self.age}
+Breed: {self.breed}
+Sex: {self.sex}
+Color: {self.color}
+Details: {OHS_BASE_URL}{self.details_endpoint}
         """
         return out
 
