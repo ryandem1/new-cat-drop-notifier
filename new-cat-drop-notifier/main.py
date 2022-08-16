@@ -16,12 +16,13 @@ def main():
     while True:
         logger.info("Checking for a cat drop...")
         cat_adoption_page = OHSAdoptPage("cats")
-        new_cats = list(set(cat_adoption_page.all_animals) - set(cats_last_seen))
+        new_cat_names = list(set(cat.name for cat in cat_adoption_page.all_animals) -
+                             set(cat.name for cat in cats_last_seen))
 
-        if new_cats:
-            logger.info(f"NEW CAT DROP! UOC (Units of Cat): {len(new_cats)}")
+        if new_cat_names:
+            logger.info(f"NEW CAT DROP! UOC (Units of Cat): {len(new_cat_names)}")
             message = "NEW CAT DROP!\n"
-            for cat in new_cats:
+            for cat in [cat for cat in cat_adoption_page.all_animals if cat.name in new_cat_names]:
                 if len(message + str(cat)) >= 1600:
                     sms_messenger.send_sms(message)
                     message = ""
