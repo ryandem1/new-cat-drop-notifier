@@ -5,7 +5,8 @@ from bs4 import BeautifulSoup, ResultSet
 from requests import RequestException, Session
 from twilio.rest import Client
 
-from consts import ADOPT_ENDPOINT, RESULT_ITEM_CLASS, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+from consts import ADOPT_ENDPOINT, RESULT_ITEM_CLASS, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, \
+    SEND_TO_PHONE_NUMBERS
 from models import AnimalType, AnimalAdoptionCard
 
 
@@ -58,7 +59,10 @@ class SMSMessenger:
         account_sid = environ[TWILIO_ACCOUNT_SID]
         auth_token = environ[TWILIO_AUTH_TOKEN]
         self.twilio = Client(account_sid, auth_token)
+        self.twilio_phone_number = environ[TWILIO_PHONE_NUMBER]
+        self.send_to_phone_numbers = environ[SEND_TO_PHONE_NUMBERS]
 
     def send_sms(self, message: str):
         """Sends an SMS message"""
-        self.twilio.messages.create(message)
+        for phone_number in self.send_to_phone_numbers:
+            self.twilio.messages.create(from_=self.twilio_phone_number, body=message, to=phone_number)
