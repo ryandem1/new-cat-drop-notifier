@@ -48,3 +48,10 @@ class OHSAdoptPage:
         :return names: List of string animal names on current adoption page
         """
         return [AnimalAdoptionCard.from_raw_result_item(result_item) for result_item in self._raw_adoption_items]
+
+
+class SMSMessenger:
+
+    def send_sms(self, message: str):
+        """Sends an SMS message"""
+        print(message)
