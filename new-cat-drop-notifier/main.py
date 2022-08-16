@@ -14,7 +14,7 @@ def main():
         new_cats = list(set(cat_adoption_page.all_animals) - set(cats_last_seen))
 
         if new_cats:
-            message = "New Cats!\n"
+            message = "NEW CAT DROP!\n"
             for cat in new_cats:
                 if len(message + str(cat)) >= 1600:
                     sms_messenger.send_sms(message)
