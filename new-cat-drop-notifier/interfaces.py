@@ -60,7 +60,7 @@ class SMSMessenger:
         auth_token = environ[TWILIO_AUTH_TOKEN]
         self.twilio = Client(account_sid, auth_token)
         self.twilio_phone_number = environ[TWILIO_PHONE_NUMBER]
-        self.send_to_phone_numbers = environ[SEND_TO_PHONE_NUMBERS]
+        self.send_to_phone_numbers = environ[SEND_TO_PHONE_NUMBERS].split(",")
 
     def send_sms(self, message: str):
         """Sends an SMS message"""
