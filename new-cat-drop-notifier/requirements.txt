@@ -1,6 +1,7 @@
 beautifulsoup4==4.11.1
 certifi==2022.6.15
 charset-normalizer==2.1.0
+google-cloud==0.34.0
 idna==3.3
 PyJWT==2.4.0
 pytz==2022.2.1
