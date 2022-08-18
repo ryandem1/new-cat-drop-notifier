@@ -55,6 +55,14 @@ class OHSAdoptPage:
         """
         return [AnimalAdoptionCard.from_raw_result_item(result_item) for result_item in self._raw_adoption_items]
 
+    @cached_property
+    def all_names(self) -> list[str]:
+        """Extracts all animal names are returns them as a list of strings, a convenience method
+
+        :return: List of string animal names on the page
+        """
+        return [animal.name for animal in self.all_animals]
+
 
 class SMSMessenger:
 

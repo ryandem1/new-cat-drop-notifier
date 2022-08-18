@@ -8,13 +8,13 @@ logger = getLogger(__name__)
 
 def main():
     cat_bucket = GoogleCloudStorage()
-    last_cat_names: list[str] = cat_bucket.get_cats_last_seen() or [cat.name for cat in OHSAdoptPage("cats").all_animals]
+    cat_adoption_page = OHSAdoptPage("cats")
+
+    last_cat_names = cat_bucket.get_cats_last_seen() or cat_adoption_page.all_names
     sms_messenger = SMSMessenger()
 
     logger.info("Checking for a cat drop...")
-    cat_adoption_page = OHSAdoptPage("cats")
-    current_cat_names = [cat.name for cat in cat_adoption_page.all_animals]
-    new_cat_names = list(set(current_cat_names) - set(last_cat_names))
+    new_cat_names = list(set(cat_adoption_page.all_names) - set(last_cat_names))
 
     if new_cat_names:
         logger.info(f"NEW CAT DROP! UOC (Units of Cat): {len(new_cat_names)}")
@@ -28,7 +28,7 @@ def main():
     else:
         logger.info("No cat drop!")
 
-    cat_bucket.upload_cats_last_seen(current_cat_names)
+    cat_bucket.upload_cats_last_seen(cat_adoption_page.all_names)
 
 
 if __name__ == '__main__':
