@@ -1,7 +1,10 @@
+import json
 from functools import cached_property
 from os import environ
+from typing import Any
 
 from bs4 import BeautifulSoup, ResultSet
+from google.cloud.storage import Client
 from requests import RequestException, Session
 from twilio.rest import Client
 
@@ -66,3 +69,23 @@ class SMSMessenger:
         """Sends an SMS message"""
         for phone_number in self.send_to_phone_numbers:
             self.twilio.messages.create(from_=self.twilio_phone_number, body=message, to=phone_number)
+
+
+class GoogleCloudStorage:
+
+    def __init__(self):
+        self.__credentials = json.loads(environ["GOOGLE_ACCOUNT_INFO"][1:-1])
+        self.__client: Client | Any = Client.from_service_account_info(self.__credentials)
+        self.__bucket = self.__client.get_bucket(environ["GOOGLE_CLOUD_BUCKET"])
+
+    def upload_cats_last_seen(self, cat_names_last_seen: list[str]):
+        """
+        Uploads the list of cat names last seen as a JSON blob in GCS.
+
+        :param cat_names_last_seen: List of string cat names to store
+        :return: None
+        """
+        json_data = json.dumps(cat_names_last_seen)
+
+        blob = self.__bucket.blob("cats_last_seen.json")
+        blob.upload_from_string(json_data)
