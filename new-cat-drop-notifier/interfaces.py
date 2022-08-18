@@ -1,10 +1,10 @@
 import json
 from functools import cached_property
 from os import environ
-from typing import Any
 
 from bs4 import BeautifulSoup, ResultSet
-from google.cloud.storage import Client
+from google.cloud import storage
+from google.oauth2.service_account import Credentials
 from requests import RequestException, Session
 from twilio.rest import Client
 
@@ -73,9 +73,11 @@ class SMSMessenger:
 
 class GoogleCloudStorage:
 
+    blob_name = "cats_last_seen.json"
+
     def __init__(self):
-        self.__credentials = json.loads(environ["GOOGLE_ACCOUNT_INFO"][1:-1])
-        self.__client: Client | Any = Client.from_service_account_info(self.__credentials)
+        self.__credentials = Credentials.from_service_account_info(json.loads(environ["GOOGLE_ACCOUNT_INFO"]))
+        self.__client = storage.Client(credentials=self.__credentials)
         self.__bucket = self.__client.get_bucket(environ["GOOGLE_CLOUD_BUCKET"])
 
     def upload_cats_last_seen(self, cat_names_last_seen: list[str]):
@@ -87,5 +89,18 @@ class GoogleCloudStorage:
         """
         json_data = json.dumps(cat_names_last_seen)
 
-        blob = self.__bucket.blob("cats_last_seen.json")
+        blob = self.__bucket.blob(self.blob_name)
         blob.upload_from_string(json_data)
+
+    def get_cats_last_seen(self) -> list[str]:
+        """
+        Returns the list of cat names from the GCS object
+
+        :return cat_names: list of string cat names
+        """
+        cats_last_seen_blob = self.__bucket.get_blob(self.blob_name)
+        if not cats_last_seen_blob:
+            return []
+
+        cats_last_seen = json.loads(cats_last_seen_blob.download_as_string())
+        return cats_last_seen
