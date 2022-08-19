@@ -21,5 +21,3 @@ jobs:
           registry: us-west1-docker.pkg.dev/loui-shed/new-cat-drop-notifier
           project_id: loui-shed
           image_name: new-cat-drop-notifier
-          dockerfile: ./new-cat-drop-notifier/Dockerfile
-          context: ./new-cat-drop-notifier
