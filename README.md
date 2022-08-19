@@ -1,7 +1,9 @@
 # New Cat Drop Notifier
 Notifier that can send a text message when the Oregon Humane Society drops a new batch of cats available for adoption.
 
-### Environment Variables
+This was designed to be run on a schedule from a Google Cloud Run job. It uses a bucket in Google Cloud Storage to persist a list of cats between runs to identify if there are new cats.
+
+### Environment Variables (All must be defined)
 
 - ``TWILIO_ACCOUNT_SID``: Twilio Account SID for SMS
 - ``TWILIO_AUTH_TOKEN``: Twilio auth token to use for SMS
