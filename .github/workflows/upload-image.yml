@@ -1,0 +1,25 @@
+name: Build and Upload Image to GCR
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout new-cat-drop-notifier
+        uses: actions/checkout@v3
+
+      - name: Push to GCR GitHub Action
+        uses: RafikFarhad/push-to-gcr-github-action@v4.1
+        with:
+          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          registry: us-west1-docker.pkg.dev/loui-shed/new-cat-drop-notifier
+          project_id: loui-shed
+          image_name: new-cat-drop-notifier
+          dockerfile: ./new-cat-drop-notifier/Dockerfile.prod
+          context: ./new-cat-drop-notifier
