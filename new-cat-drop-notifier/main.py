@@ -15,6 +15,7 @@ def main():
 
     logger.info("Checking for a cat drop...")
     new_cat_names = list(set(cat_adoption_page.all_names) - set(last_cat_names))
+    cat_bucket.upload_cats_last_seen(cat_adoption_page.all_names)
 
     if new_cat_names:
         logger.info(f"NEW CAT DROP! UOC (Units of Cat): {len(new_cat_names)}")
@@ -27,8 +28,6 @@ def main():
         sms_messenger.send_sms(message)
     else:
         logger.info("No cat drop!")
-
-    cat_bucket.upload_cats_last_seen(cat_adoption_page.all_names)
 
 
 if __name__ == '__main__':
