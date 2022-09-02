@@ -15,15 +15,15 @@ AnimalType = Literal["dogs", "cats", "small", "horsefarm"]
 @dataclass(frozen=True)
 class AnimalAdoptionCard:
     """Represents 1 adoption card item from the /adopt page"""
-    id: int
+    id: int | None
     added_timestamp: datetime
     animal_type: AnimalType | str
     details_endpoint: str
-    name: str
-    breed: str
-    sex: str
-    color: str
-    age: str
+    name: str | None
+    breed: str | None
+    sex: str | None
+    color: str | None
+    age: str | None
 
     def __str__(self) -> str:
         out = f"""\n
@@ -40,14 +40,14 @@ Details: {OHS_BASE_URL}{self.details_endpoint}
     def from_raw_result_item(cls, result_item: Tag):
         """Will initialize card from a raw HTML result-item"""
         obj = cls(
-            id=int(str(result_item.find_next("span", {"class": "id"}).contents[0])),
+            id=int(str(next(iter(result_item.find_next("span", {"class": "id"}).contents), None))),
             added_timestamp=datetime.fromtimestamp(float(result_item["data-ohssb-ts"])),
             animal_type=result_item["data-ohssb-type"],
             details_endpoint=str(result_item.find_next("a")["href"]),
-            name=str(result_item.find_next("span", {"class": "name"}).contents[0]),
-            breed=str(result_item.find_next("span", {"class": "breed"}).contents[0]),
-            sex=str(result_item.find_next("span", {"class": "sex"}).contents[0]),
-            color=str(result_item.find_next("span", {"class": "color"}).contents[0]),
-            age=str(result_item.find_next("span", {"class": "age"}).contents[0])
+            name=str(next(iter(result_item.find_next("span", {"class": "name"}).contents), None)),
+            breed=str(next(iter(result_item.find_next("span", {"class": "breed"}).contents), None)),
+            sex=str(next(iter(result_item.find_next("span", {"class": "sex"}).contents), None)),
+            color=str(next(iter(result_item.find_next("span", {"class": "color"}).contents), None)),
+            age=str(next(iter(result_item.find_next("span", {"class": "age"}).contents), None))
         )
         return obj
