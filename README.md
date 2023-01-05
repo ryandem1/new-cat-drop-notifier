@@ -15,4 +15,5 @@ This was designed to be run on a schedule from a Google Cloud Run job. It uses a
 THIS PROJECT IS COMPLETE:
 
 behold! my new cat Sita:
-![55301E43-D4B6-4CC0-A279-E3B4BFE3C003_1_105_c](https://user-images.githubusercontent.com/56234568/210699195-28e77d53-8a14-40f6-9042-8d3bdde89ead.jpeg)
+
+<img width="207" alt="image" src="https://user-images.githubusercontent.com/56234568/210699375-b7c9738d-ff8c-4f78-9c1b-a2143d994328.png">
