@@ -1,5 +1,5 @@
 # New Cat Drop Notifier
-Notifier that can send a text message when the Oregon Humane Society drops a new batch of cats available for adoption.
+Notifier that can send a text message when the Oregon Humane Society drops a new batch of cats available for adoption. Here, currently in Oregon, it is difficult to find a younger cat for adoption. I am intent on finding a cat the same age as my current cat. This is so I don't have to just refresh the site constantly; this is the example of "spending 5 hours automating a manual process that took less than 5 seconds".
 
 This was designed to be run on a schedule from a Google Cloud Run job. It uses a bucket in Google Cloud Storage to persist a list of cats between runs to identify if there are new cats.
 
