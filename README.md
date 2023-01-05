@@ -11,3 +11,8 @@ This was designed to be run on a schedule from a Google Cloud Run job. It uses a
 - ``SEND_TO_PHONE_NUMBERS``: Comma-separated list of phone numbers like: `+1123456789,+1212313414`
 - ``OOOGLE_ACCOUNT_INFO``: String JSON object of Google account info. Download from Google Cloud
 - ``GOOGLE_CLOUD_BUCKET``: Bucket to store JSON last cats seen
+
+THIS PROJECT IS COMPLETE:
+
+behold! my new cat Sita:
+![55301E43-D4B6-4CC0-A279-E3B4BFE3C003_1_105_c](https://user-images.githubusercontent.com/56234568/210699195-28e77d53-8a14-40f6-9042-8d3bdde89ead.jpeg)
